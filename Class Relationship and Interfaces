@@ -1,0 +1,63 @@
+interface Priority {
+void setPriority(int priority);
+int getPriority();
+}
+interface Complexity {
+void setComplexity(int complexity);
+int getComplexity();
+}
+class Task implements Priority, Complexity, Comparable<Task> {
+private String description;
+private int priority;
+private int complexity;
+public Task(String description) {
+this.description = description;
+}
+@Override
+public void setPriority(int priority) {
+this.priority = priority;
+}
+@Override
+public int getPriority() {
+return priority;
+}
+@Override
+public void setComplexity(int complexity) {
+this.complexity = complexity;
+}
+@Override
+public int getComplexity() {
+return complexity;
+}
+@Override
+public int compareTo(Task otherTask) {
+int priorityComparison = Integer.compare(this.getPriority(), otherTask.getPriority());
+if (priorityComparison == 0) {
+return Integer.compare(this.getComplexity(), otherTask.getComplexity());
+}
+return priorityComparison;
+}
+@Override
+public String toString() {
+return "Task: " + description + " | Priority: " + priority + " | Complexity: " + complexity;
+}
+}
+public class driver {
+public static void main(String[] args) {
+System.out.println("Here are your tasks:");
+Task task1 = new Task("Do math homework");
+task1.setPriority(2);
+task1.setComplexity(5);
+Task task2 = new Task("Attend lecture for English");
+task2.setPriority(1);
+task2.setComplexity(3);
+Task task3 = new Task("Respond to teacher emails");
+task3.setPriority(2);
+task3.setComplexity(2);
+Task[] tasks = {task1, task2, task3};
+java.util.Arrays.sort(tasks);
+for (Task task : tasks) {
+System.out.println(task);
+}
+}
+}
