@@ -1,0 +1,91 @@
+package methodDesign;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        //Info on student and Grades and Courses
+        Student liam = new Student("Liam", "Anderson", "French", 85, "Biology", 91, "PE", 100);
+        Student ava = new Student("Ava", "Robinson", "Art", 87, "English", 95, "Computer Science", 77);
+        Student ethan = new Student("Ethan", "Davis", "Calculus", 92, "Chemistry", 88, "History", 98);
+
+        //Decimal Format 2 decimal place
+        DecimalFormat df = new DecimalFormat("0.##");
+
+        //Average test score rounded to 2 decimals
+        System.out.println(liam.toString() + "\nAverage test score: " + df.format(liam.getAverage()) + "\n");
+        System.out.println(ava.toString() + "\nAverage test score: " + df.format(ava.getAverage()) + "\n");
+        System.out.println(ethan.toString() + "\nAverage test score: " + df.format(ethan.getAverage()) + "\n");
+    }
+}
+
+class Student {
+    private String firstName, lastName, courseOne, courseTwo, courseThree;
+    private double gradeOne, gradeTwo, gradeThree;
+    //Add on courses and grades to object
+    public Student(){
+        firstName = "";
+        lastName = "";
+        courseOne = "";
+        gradeOne = 0;
+        courseTwo = "";
+        gradeTwo = 0;
+        courseThree = "";
+        gradeThree = 0;
+    }
+
+    public Student(String first, String last, String course1, double grade1, String course2,
+                   double grade2, String course3, double grade3){
+        firstName = first;
+        lastName = last;
+        courseOne = course1;
+        gradeOne = grade1;
+        courseTwo = course2;
+        gradeTwo = grade2;
+        courseThree = course3;
+        gradeThree = grade3;
+    }
+
+    //Getters and setters for test grades
+    public void setGradeOne(double grade1){
+        gradeOne = grade1;
+    }
+
+    public double getGradeOne(){
+        return gradeOne;
+    }
+
+    public void setGradeTwo(double grade2){
+        gradeTwo = grade2;
+    }
+
+    public double getGradeTwo(){
+        return gradeTwo;
+    }
+
+    public void setGradeThree(double grade3){
+        gradeThree = grade3;
+    }
+
+    public double getGradeThree(){
+        return gradeThree;
+    }
+
+    //Find average by dividing grades by 3
+    public double getAverage(){
+        double average;
+        average = (gradeOne + gradeTwo + gradeThree) / 3;
+        return average;
+    }
+
+    //Displays and formats student name, courses, and grades
+    @Override
+    public String toString(){
+        String result;
+        result = "Name: " + firstName + " " + lastName + "\nCourse 1: " + courseOne +
+                " | Grade: " + gradeOne + "\nCourse 2: " + courseTwo +
+                " | Grade: " + gradeTwo + "\nCourse 3: " + courseThree +
+                " | Grade: " + gradeThree;
+        return result;
+    }
+}
