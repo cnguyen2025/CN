@@ -1,63 +1,91 @@
+// Interface for tasks with priority
 interface Priority {
-void setPriority(int priority);
-int getPriority();
+    void setPriority(int priority); // Set the priority level
+    int getPriority(); // Get the priority level
 }
+
+// Interface for tasks with complexity
 interface Complexity {
-void setComplexity(int complexity);
-int getComplexity();
+    void setComplexity(int complexity); // Set the complexity level
+    int getComplexity(); // Get the complexity level
 }
+
+// Task class implementing Priority, Complexity, and Comparable for sorting
 class Task implements Priority, Complexity, Comparable<Task> {
-private String description;
-private int priority;
-private int complexity;
-public Task(String description) {
-this.description = description;
+    private String description; // Task description
+    private int priority; // Priority level
+    private int complexity; // Complexity level
+
+    // Constructor to create a task with a description
+    public Task(String description) {
+        this.description = description;
+    }
+
+    // Setters and getters for priority and complexity
+    @Override
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    @Override
+    public int getPriority() {
+        return priority;
+    }
+
+    @Override
+    public void setComplexity(int complexity) {
+        this.complexity = complexity;
+    }
+
+    @Override
+    public int getComplexity() {
+        return complexity;
+    }
+
+    // Compare tasks based on priority and then complexity
+    @Override
+    public int compareTo(Task otherTask) {
+        int priorityComparison = Integer.compare(this.getPriority(), otherTask.getPriority());
+        if (priorityComparison == 0) {
+            return Integer.compare(this.getComplexity(), otherTask.getComplexity());
+        }
+        return priorityComparison;
+    }
+
+    // Print out the task, priority, and complexity
+    @Override
+    public String toString() {
+        return "Task: " + description + " | Priority: " + priority + " | Complexity: " + complexity;
+    }
 }
-@Override
-public void setPriority(int priority) {
-this.priority = priority;
-}
-@Override
-public int getPriority() {
-return priority;
-}
-@Override
-public void setComplexity(int complexity) {
-this.complexity = complexity;
-}
-@Override
-public int getComplexity() {
-return complexity;
-}
-@Override
-public int compareTo(Task otherTask) {
-int priorityComparison = Integer.compare(this.getPriority(), otherTask.getPriority());
-if (priorityComparison == 0) {
-return Integer.compare(this.getComplexity(), otherTask.getComplexity());
-}
-return priorityComparison;
-}
-@Override
-public String toString() {
-return "Task: " + description + " | Priority: " + priority + " | Complexity: " + complexity;
-}
-}
+
+// Driver class
 public class driver {
-public static void main(String[] args) {
-System.out.println("Here are your tasks:");
-Task task1 = new Task("Do math homework");
-task1.setPriority(2);
-task1.setComplexity(5);
-Task task2 = new Task("Attend lecture for English");
-task2.setPriority(1);
-task2.setComplexity(3);
-Task task3 = new Task("Respond to teacher emails");
-task3.setPriority(2);
-task3.setComplexity(2);
-Task[] tasks = {task1, task2, task3};
-java.util.Arrays.sort(tasks);
-for (Task task : tasks) {
-System.out.println(task);
-}
-}
+    public static void main(String[] args) {
+        System.out.println("Here are your tasks:");
+
+        // Creating tasks
+        Task task1 = new Task("Do math homework");
+        task1.setPriority(2);
+        task1.setComplexity(5);
+
+        Task task2 = new Task("Attend lecture for English");
+        task2.setPriority(1);
+        task2.setComplexity(3);
+
+        Task task3 = new Task("Respond to teacher emails");
+        task3.setPriority(2);
+        task3.setComplexity(2);
+
+        // Array of tasks
+        Task[] tasks = {task1, task2, task3};
+
+        // Sorting tasks based on priority and complexity
+        java.util.Arrays.sort(tasks);
+
+        // Printing sorted tasks
+        for (Task task : tasks) {
+            System.out.println(task);
+        }
+    }
 }
