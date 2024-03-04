@@ -1,0 +1,29 @@
+// Airplane class representing an airplane, extends Vehicle
+public class Airplane extends Vehicle {
+    // Wingspan of the airplane
+    private int wingspan;
+
+    // Constructor for creating an Airplane object
+    public Airplane(String brandName, double speed, int passengers, double cargoWeight, int wingspan) {
+        // Call superclass constructor
+        super(brandName, speed, passengers, cargoWeight);
+        // Set wingspan
+        this.wingspan = wingspan;
+    }
+
+    // Getter method for wingspan
+    public int getWingspan() {
+        return wingspan;
+    }
+
+    // Setter method for wingspan
+    public void setWingspan(int wingspan) {
+        this.wingspan = wingspan;
+    }
+
+    // String representation of Airplane
+    @Override
+    public String toString() {
+        return super.toString() + "Wingspan: \t\t" + wingspan + " ft\n";
+    }
+}
