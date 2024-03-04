@@ -1,0 +1,31 @@
+// Spaceship class representing a spaceship, extends Vehicle
+public class Spaceship extends Vehicle {
+
+    // Indicates whether the spaceship has warp drive capability
+    private boolean warpDrive;
+
+    // Constructor for creating a Spaceship object
+    public Spaceship(String brandName, double speed, int passengers, double cargoWeight, boolean warpDrive) {
+        // Call the superclass constructor
+        super(brandName, speed, passengers, cargoWeight);
+        // Initialize the warpDrive attribute
+        this.warpDrive = warpDrive;
+    }
+
+    // Checks if the spaceship has warp drive capability
+    public boolean hasWarpDrive() {
+        return warpDrive;
+    }
+
+    // Sets whether the spaceship has warp drive capability
+    public void setWarpDrive(boolean warpDrive) {
+        this.warpDrive = warpDrive;
+    }
+
+    // String representation of the Spaceship object
+    @Override
+    public String toString() {
+        // Include warpDrive information
+        return super.toString() + "Has Warp Drive: \t" + (warpDrive ? "Yes" : "No") + "\n";
+    }
+}
