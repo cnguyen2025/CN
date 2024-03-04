@@ -1,0 +1,8 @@
+// Interface for measuring speed
+public interface Speedometer {
+    // Sets the speed
+    void setSpeed(double inSpeed);
+
+    // Gets the speed
+    double getSpeed();
+}
