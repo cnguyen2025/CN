@@ -1,0 +1,33 @@
+// Tank class representing a tank, extends Vehicle
+public class Tank extends Vehicle {
+
+    // Indicates whether the tank is armed or not
+    private boolean armed;
+
+    // Constructor for creating a Tank object
+    public Tank(String brandName, double speed, int passengers, double cargoWeight, boolean armed) {
+        // Call the superclass constructor
+        super(brandName, speed, passengers, cargoWeight);
+        // Initialize the armed attribute
+        this.armed = armed;
+    }
+
+    // Checks if the tank is armed
+    public boolean isArmed() {
+        return armed;
+    }
+
+    // Sets whether the tank is armed or not
+    public void setArmed(boolean armed) {
+        this.armed = armed;
+    }
+
+    // Overrides the toString method to provide a string representation of the Tank object
+    @Override
+    public String toString() {
+        // Call the superclass toString method
+        return super.toString() +
+                // Add armed information
+                "Armed: \t\t\t" + (armed ? "Yes" : "No") + "\n";
+    }
+}
