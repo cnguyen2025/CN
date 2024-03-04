@@ -1,0 +1,31 @@
+// Funky class representing a disco car, extends Vehicle
+public class Funky extends Vehicle {
+
+    // Indicates whether the Funky Vehicle has a disco ball
+    private boolean discoBall;
+
+    // Constructor for creating a Funky Vehicle object
+    public Funky(String brandName, double speed, int passengers, double cargoWeight, boolean discoBall) {
+        // Call the superclass constructor
+        super(brandName, speed, passengers, cargoWeight);
+        // Initialize the discoBall attribute
+        this.discoBall = discoBall;
+    }
+
+    // Checks if the Funky Vehicle has a disco ball
+    public boolean hasDiscoBall() {
+        return discoBall;
+    }
+
+    // Sets whether the Funky Vehicle has a disco ball
+    public void setDiscoBall(boolean discoBall) {
+        this.discoBall = discoBall;
+    }
+
+    // String representation of the Funky Vehicle object
+    @Override
+    public String toString() {
+        // Include discoBall information
+        return super.toString() + "Has Disco Ball: \t" + (discoBall ? "Yes" : "No") + "\n";
+    }
+}
