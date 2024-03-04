@@ -1,34 +1,42 @@
 public class Main {
     public static void main(String[] args) {
         // Create and display vehicle information
+        System.out.println("Vehicle");
         Vehicle vehicle = new Vehicle("Toyota", 60.0, 5, 1000.0);
         System.out.println(vehicle);
 
         // Create and display car information
-        Car car = new Car("Honda", 70.0, 4, 800.0, 30.0);
+        System.out.println("Car");
+        Car car = new Car("Honda", 70.0, 7, 800.0, 30.0);
         System.out.println(car);
 
         // Create and display boat information
+        System.out.println("Boat");
         Boat boat = new Boat("Yamaha", 30.0, 10, 2000.0, 5.5);
         System.out.println(boat);
 
         // Create and display airplane information
+        System.out.println("Airplane");
         Airplane airplane = new Airplane("Boeing", 500.0, 200, 50000.0, 200);
         System.out.println(airplane);
 
         // Create and display motorcycle information
+        System.out.println("Motorcycle");
         Motorcycle motorcycle = new Motorcycle("Harley Davidson", 80.0, 2, 500.0, true);
         System.out.println(motorcycle);
 
         // Create and display tank information
+        System.out.println("Tank");
         Tank tank = new Tank("M1 Abrams", 40.0, 4, 80000.0, true);
         System.out.println(tank);
 
         // Create and display spaceship information
+        System.out.println("Spaceship");
         Spaceship spaceship = new Spaceship("Millennium Falcon", 500.0, 10, 20000.0, true);
         System.out.println(spaceship);
 
         // Create and display funky vehicle information
+        System.out.println("Funky Vehicle");
         Funky funkyVehicle = new Funky("GroovyMobile", 80.0, 2, 300.0, true);
         System.out.println(funkyVehicle);
     }
