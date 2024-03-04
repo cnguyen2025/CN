@@ -1,0 +1,56 @@
+// Car class representing a car, extends Vehicle
+public class Car extends Vehicle {
+    // Number of wheels
+    int wheels = 4;
+    // Color of the car
+    String color = "White";
+    // Indicates whether the car has a spoiler
+    boolean spoiler = false;
+    // Indicates whether the car has a stereo
+    boolean stereo = false;
+    // Miles per gallon of the car
+    double mpg = 0.0;
+
+    // Constructor for creating a Car object
+    public Car(String inBrand, double inSpeed, int inPassengers, double inCargo, double inMPG) {
+        // Call superclass constructor
+        super(inBrand, inSpeed, inPassengers, inCargo);
+        // Set MPG
+        mpg = inMPG;
+    }
+
+    // Getter for spoiler
+    public boolean getSpoiler() {
+        return spoiler;
+    }
+
+    // Getter for stereo
+    public boolean getStereo() {
+        return stereo;
+    }
+
+    // Override getSpeed method to account for spoiler
+    @Override
+    public double getSpeed() {
+        if (spoiler)
+            return super.getSpeed() + 20;
+        else
+            return super.getSpeed();
+    }
+
+    // Getter for MPG, adjusted based on stereo presence
+    public double getMPG() {
+        if (stereo)
+            return mpg - (mpg / 10);
+        else
+            return mpg;
+    }
+
+    // String representation of Car
+    @Override
+    public String toString() {
+        return super.toString() + "MPG :\t\t\t" + this.getMPG() + "\n";
+    }
+
+
+}
