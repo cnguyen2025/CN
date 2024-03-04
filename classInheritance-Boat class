@@ -1,0 +1,29 @@
+// Boat class representing a boat, extends Vehicle
+public class Boat extends Vehicle {
+    // Water displacement of the boat
+    private double waterDisplacement;
+
+    // Constructor for creating a Boat object
+    public Boat(String brandName, double speed, int passengers, double cargoWeight, double waterDisplacement) {
+        // Call superclass constructor
+        super(brandName, speed, passengers, cargoWeight);
+        // Set water displacement
+        this.waterDisplacement = waterDisplacement;
+    }
+
+    // Getter method for water displacement
+    public double getWaterDisplacement() {
+        return waterDisplacement;
+    }
+
+    // Setter method for water displacement
+    public void setWaterDisplacement(double waterDisplacement) {
+        this.waterDisplacement = waterDisplacement;
+    }
+
+    // String representation of Boat
+    @Override
+    public String toString() {
+        return super.toString() + "Water Displacement: \t" + waterDisplacement + " tons\n";
+    }
+}
