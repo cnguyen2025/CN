@@ -1,0 +1,31 @@
+// Motorcycle class representing a motorcycle, extends Vehicle
+public class Motorcycle extends Vehicle {
+
+    // Indicates if the motorcycle has a sidecar
+    private boolean sidecar;
+
+    // Constructor for Motorcycle.
+    public Motorcycle(String brandName, double speed, int passengers, double cargoWeight, boolean sidecar) {
+        // Call superclass constructor
+        super(brandName, speed, passengers, cargoWeight);
+        // Initialize sidecar attribute
+        this.sidecar = sidecar;
+    }
+
+    // Checks if the motorcycle has a sidecar
+    public boolean hasSidecar() {
+        return sidecar;
+    }
+
+    // Sets whether the motorcycle has a sidecar
+    public void setSidecar(boolean sidecar) {
+        this.sidecar = sidecar;
+    }
+
+    // String representation of motorcycle
+    @Override
+    public String toString() {
+        // Include sidecar information
+        return super.toString() + "Has Sidecar: \t" + (sidecar ? "Yes" : "No") + "\n";
+    }
+}
