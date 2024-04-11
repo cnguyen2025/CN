@@ -1,0 +1,29 @@
+import java.util.Random;
+
+// Class implementing the MoveStrategy interface to define a random move strategy
+class RandomMoveStrategy implements MoveStrategy {
+    // Random number generator
+    private Random random;
+
+    // Constructor to initialize the random number generator
+    public RandomMoveStrategy() {
+        // Create a new Random object
+        random = new Random();
+    }
+
+    // Method to make a random move on the board
+    @Override
+    public void makeMove(Board board, char symbol) {
+        // Variables to store row and column indices
+        int row, col;
+
+        // Generate random row and column indices until a valid move is found
+        do {
+            // Generate a random row index
+            row = random.nextInt(Board.SIZE);
+            // Generate a random column index
+            col = random.nextInt(Board.SIZE);
+            // Continue looping until a valid move is made
+        } while (!board.markSpace(row, col, symbol));
+    }
+}
