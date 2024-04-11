@@ -1,0 +1,7 @@
+import java.util.Random;
+
+// Interface defining a strategy for making moves in a game
+interface MoveStrategy {
+    // Method to make a move on the board
+    void makeMove(Board board, char symbol);
+}
