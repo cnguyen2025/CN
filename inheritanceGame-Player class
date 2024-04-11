@@ -1,0 +1,18 @@
+// Abstract class representing a player in the game
+abstract class Player {
+    // Symbol representing the player (ie, 'X' or 'O')
+    protected char symbol;
+    // Strategy for making moves
+    protected MoveStrategy moveStrategy;
+
+    // Constructor to initialize the player with a symbol and move strategy
+    public Player(char symbol, MoveStrategy moveStrategy) {
+        // Initialize the symbol
+        this.symbol = symbol;
+        // Initialize the move strategy
+        this.moveStrategy = moveStrategy;
+    }
+
+    // Abstract method for making a move on the board
+    public abstract void makeMove(Board board);
+}
