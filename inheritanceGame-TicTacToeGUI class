@@ -1,0 +1,201 @@
+// Import statements
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
+// Class representing the graphical user interface for the Tic Tac Toe game
+public class TicTacToeGUI extends JFrame implements ActionListener {
+    // Instance variables
+    // Buttons for the game board
+    private JButton[][] buttons;
+    // 2D array to represent the game board
+    private char[][] board;
+    // Symbol representing the current player ('X' or 'O')
+    private char currentPlayer;
+    // Random number generator for computer moves
+    private Random random;
+    // Text area for game instructions
+    private JTextArea instructions;
+
+    // Constructor
+    public TicTacToeGUI() {
+        setTitle("Tic Tac Toe");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Adjusted size to fit the game board and instructions
+        setSize(300, 350);
+        setLayout(new BorderLayout());
+
+        // Instructions Panel
+        instructions = new JTextArea();
+        instructions.setEditable(false);
+        instructions.append("Welcome to Tic Tac Toe!\n");
+        instructions.append("Select a square to make your move.\n");
+        instructions.append("You are X, and the computer is O.\n");
+        add(instructions, BorderLayout.NORTH);
+
+        // Game Board Panel
+        JPanel gamePanel = new JPanel();
+        gamePanel.setLayout(new GridLayout(3, 3));
+        add(gamePanel, BorderLayout.CENTER);
+        // Initialize buttons array
+        buttons = new JButton[3][3];
+        // Initialize board array
+        board = new char[3][3];
+        // Set initial player
+        currentPlayer = 'X';
+        // Initialize random number generator
+        random = new Random();
+        // Initialize game board
+        initializeBoard(gamePanel);
+        // Set frame visible
+        setVisible(true);
+    }
+
+    // Method to initialize the game board with buttons
+    private void initializeBoard(JPanel gamePanel) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                // Create new button
+                buttons[i][j] = new JButton();
+                // Set button font
+                buttons[i][j].setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+                // Add action listener
+                buttons[i][j].addActionListener(this);
+                // Add button to panel
+                gamePanel.add(buttons[i][j]);
+                // Initialize board cell
+                board[i][j] = '-';
+            }
+        }
+    }
+
+    // ActionListener implementation
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Get source of action event
+        JButton button = (JButton) e.getSource();
+        // Initialize row and column indices
+        int row = -1, col = -1;
+
+        // Find the button clicked to determine its position
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (buttons[i][j] == button) {
+                    row = i;
+                    col = j;
+                    break;
+                }
+            }
+        }
+
+        // Make a move if the button is valid
+        if (row != -1 && col != -1 && board[row][col] == '-') {
+            // Mark board cell with current player's symbol
+            board[row][col] = currentPlayer;
+            // Set button text to player's symbol
+            button.setText(String.valueOf(currentPlayer));
+
+            // Check for win or draw
+            if (checkWin(currentPlayer)) {
+                JOptionPane.showMessageDialog(this, "Player " + currentPlayer + " wins!");
+                resetBoard();
+            } else if (isBoardFull()) {
+                JOptionPane.showMessageDialog(this, "It's a draw!");
+                resetBoard();
+            } else {
+                currentPlayer = (currentPlayer == 'X') ? 'O' : 'X'; // Switch player
+                if (currentPlayer == 'O') {
+                    // Make computer move if current player is 'O'
+                    makeComputerMove();
+                }
+            }
+        }
+    }
+
+    // Method for the computer player to make a move
+    private void makeComputerMove() {
+
+        int row, col; // Variables to store row and column indices
+        do {
+            // Generate random row index
+            row = random.nextInt(3);
+            // Generate random column index
+            col = random.nextInt(3);
+            // Repeat until valid empty cell is found
+        } while (board[row][col] != '-');
+        // Mark board cell with computer symbol
+        board[row][col] = 'O';
+        // Set button text to computer symbol
+        buttons[row][col].setText("O");
+
+        // Check for win or draw
+        if (checkWin('O')) {
+            JOptionPane.showMessageDialog(this, "Computer wins!");
+            resetBoard();
+        } else if (isBoardFull()) {
+            JOptionPane.showMessageDialog(this, "It's a draw!");
+            resetBoard();
+        } else {
+            // Switch back to human player
+            currentPlayer = 'X';
+        }
+    }
+
+    // Method to check for a win by the specified player
+    private boolean checkWin(char player) {
+        // Check rows, columns, and diagonals for a win
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] == player && board[i][1] == player && board[i][2] == player) {
+                return true; // Row win
+            }
+            if (board[0][i] == player && board[1][i] == player && board[2][i] == player) {
+                return true; // Column win
+            }
+        }
+        if (board[0][0] == player && board[1][1] == player && board[2][2] == player) {
+            return true; // Diagonal win
+        }
+        if (board[0][2] == player && board[1][1] == player && board[2][0] == player) {
+            return true; // Diagonal win
+        }
+        return false; // No win
+    }
+
+    // Method to check if the board is full
+    private boolean isBoardFull() {
+        // Check if all cells are filled
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == '-') {
+                    // Board is not full
+                    return false;
+                }
+            }
+        }
+        // Board is full
+        return true;
+    }
+
+    // Method to reset the game board
+    private void resetBoard() {
+        // Reset board and current player
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                // Clear button text
+                buttons[i][j].setText("");
+                // Reset board cell
+                board[i][j] = '-';
+            }
+        }
+        // Reset current player to 'X'
+        currentPlayer = 'X';
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        // Create and show GUI
+        SwingUtilities.invokeLater(TicTacToeGUI::new);
+    }
+}
