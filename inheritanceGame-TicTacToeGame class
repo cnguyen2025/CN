@@ -1,0 +1,92 @@
+import java.util.Scanner;
+
+// Class representing the Tic Tac Toe game
+public class TicTacToeGame {
+    // Define variables
+    // The game board
+    private Board board;
+    // Array to hold players
+    private Player[] players;
+    // Index of the current player
+    private int currentPlayerIndex;
+    // Declare moveStrategy as a field
+    private MoveStrategy moveStrategy;
+
+    // Constructor
+    public TicTacToeGame() {
+        // Create a new game board
+        board = new Board();
+        // Create an array for two players
+        players = new Player[2];
+        // Start with the first player
+        currentPlayerIndex = 0;
+    }
+
+    // Method to initialize players
+    private void initializePlayers() {
+        // Scanner for user input
+        Scanner scanner = new Scanner(System.in);
+        // Symbols for human and computer players
+        char humanSymbol, computerSymbol;
+
+        // Prompt the user to choose X or O symbol
+        System.out.print("Enter symbol for Human Player (X or O): ");
+        String symbolInput = scanner.nextLine().toUpperCase();
+
+        // If input contains more than one character or is not 'X' or 'O', prompt user to input in correct format
+        while (symbolInput.length() != 1 || (symbolInput.charAt(0) != 'X' && symbolInput.charAt(0) != 'O')) {
+            System.out.print("Invalid input. Please enter 'X' or 'O': ");
+            symbolInput = scanner.nextLine().toUpperCase();
+        }
+
+        // Assign symbol to players
+        humanSymbol = symbolInput.charAt(0);
+
+        // Assign symbols to players
+        computerSymbol = (humanSymbol == 'X') ? 'O' : 'X';
+
+        // Create player objects
+        players[0] = new HumanPlayer(humanSymbol);
+        players[1] = new ComputerPlayer(computerSymbol, new SmartMoveStrategy());
+    }
+
+    // Method to switch players
+    private void switchPlayer() {
+        currentPlayerIndex = (currentPlayerIndex + 1) % 2;
+    }
+
+    // Method to play the game
+    private void playGame() {
+        initializePlayers();
+        boolean gameOver = false;
+        int moves = 0;
+
+        while (!gameOver) {
+            board.display();
+            System.out.println("Player " + players[currentPlayerIndex].symbol + "'s turn.");
+
+            players[currentPlayerIndex].makeMove(board);
+            moves++;
+
+            if (board.checkWin(players[currentPlayerIndex].symbol)) {
+                board.display();
+                System.out.println("Player " + players[currentPlayerIndex].symbol + " wins!");
+                gameOver = true;
+            } else if (board.isFull()) {
+                board.display();
+                System.out.println("It's a draw!");
+                gameOver = true;
+            }
+
+            switchPlayer();
+        }
+    }
+
+    // Main method to start the game
+    public static void main(String[] args) {
+        // Create a new instance of the game
+        TicTacToeGame game = new TicTacToeGame();
+        // Start playing the game
+        game.playGame();
+    }
+}
