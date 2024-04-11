@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+// Class representing a human player in the game
+class HumanPlayer extends Player {
+    private Scanner scanner; // Scanner for user input
+
+    // Constructor to initialize the human player with a symbol and scanner
+    public HumanPlayer(char symbol) {
+        // Human player doesn't use a move strategy
+        super(symbol, null);
+        // Initialize the scanner for user input
+        scanner = new Scanner(System.in);
+    }
+
+    // Method for the human player to make a move
+    @Override
+    public void makeMove(Board board) {
+        // Variables to store row and column indices
+        int row, col;
+
+        // Prompt the player to enter row and column indices for their move
+        do {
+            System.out.print("Enter row and column (1-3) for your move (e.g., 1 2): ");
+            // Read the row index from the user
+            row = scanner.nextInt();
+            // Read the column index from the user
+            col = scanner.nextInt();
+            // Continue looping until a valid move is made
+        } while (!board.markSpace(row, col, symbol));
+    }
+}
