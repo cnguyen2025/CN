@@ -1,0 +1,16 @@
+// Class representing a computer player in the game
+class ComputerPlayer extends Player {
+
+    // Constructor to initialize the computer player with a symbol and move strategy
+    public ComputerPlayer(char symbol, MoveStrategy moveStrategy) {
+        // Call the constructor of the superclass
+        super(symbol, moveStrategy);
+    }
+
+    // Method for the computer player to make a move
+    @Override
+    public void makeMove(Board board) {
+        // Delegate move making to the assigned move strategy
+        moveStrategy.makeMove(board, symbol);
+    }
+}
