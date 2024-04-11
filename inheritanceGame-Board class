@@ -1,0 +1,101 @@
+import java.util.Random;
+
+// Class representing the game board
+class Board {
+    // Size of the board
+    public static final int SIZE = 3;
+    // 2D array to represent the grid
+    private char[][] grid;
+
+    // Constructor to initialize the board
+    public Board() {
+        // Initialize the grid with - symbols
+        grid = new char[SIZE][SIZE];
+        initializeBoard();
+    }
+
+    // Method to initialize the board with empty spaces
+    private void initializeBoard() {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                // Fill the grid with - symbols
+                grid[row][col] = '-';
+            }
+        }
+    }
+
+    // Method to clear the board by re-initializing it
+    public void clearBoard() {
+        initializeBoard();
+    }
+
+    // Method to get the mark at a specific position on the board
+    public char getMark(int row, int col) {
+        return grid[row][col];
+    }
+
+    // Method to display the current state of the board
+    public void display() {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                // Display each cell of the grid
+                System.out.print(grid[row][col] + " ");
+            }
+            // Move to the next row
+            System.out.println();
+        }
+    }
+
+    // Method to mark a space on the board with a symbol
+    public boolean markSpace(int row, int col, char symbol) {
+        // Convert symbol to uppercase
+        char upperCaseSymbol = Character.toUpperCase(symbol);
+        // Check if the move is within bounds and the space is empty
+        if (row < 1 || row > SIZE || col < 1 || col > SIZE || grid[row - 1][col - 1] != '-') {
+            // Invalid move
+            return false;
+        }
+        // Mark the space with the symbol
+        grid[row - 1][col - 1] = upperCaseSymbol;
+        return true;
+    }
+
+    // Method to check if a player has won the game
+    public boolean checkWin(char symbol) {
+        // Check rows, columns, and diagonals for a win
+        for (int i = 0; i < SIZE; i++) {
+            if (grid[i][0] == symbol && grid[i][1] == symbol && grid[i][2] == symbol) {
+                // Row win
+                return true;
+            }
+            if (grid[0][i] == symbol && grid[1][i] == symbol && grid[2][i] == symbol) {
+                // Column win
+                return true;
+            }
+        }
+        if (grid[0][0] == symbol && grid[1][1] == symbol && grid[2][2] == symbol) {
+            // Diagonal win
+            return true;
+        }
+        if (grid[0][2] == symbol && grid[1][1] == symbol && grid[2][0] == symbol) {
+            // Diagonal win
+            return true;
+        }
+        // No win
+        return false;
+    }
+
+    // Method to check if the board is full (no empty spaces left)
+    public boolean isFull() {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                if (grid[row][col] == '-') {
+                    // Board is not full
+                    return false;
+                }
+            }
+        }
+        // Board is full
+        return true;
+    }
+}
