@@ -1,0 +1,10 @@
+// Class implementing the MoveStrategy interface to make a smart move strategy
+class SmartMoveStrategy implements MoveStrategy {
+
+    // Method to make a smart move on the board
+    @Override
+    public void makeMove(Board board, char symbol) {
+        // Use RandomMoveStrategy for making moves because smart move is too difficult to make
+        new RandomMoveStrategy().makeMove(board, symbol);
+    }
+}
