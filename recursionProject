@@ -1,0 +1,34 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static int[] pascal(int n) {
+        if (n == 1) {
+            return new int[] {1};
+        } else {
+            int[] line = new int[n];
+            line[0] = 1;
+            line[n - 1] = 1;
+            int[] previousLine = pascal(n - 1);
+            for (int i = 1; i < n - 1; i++) {
+                line[i] = previousLine[i - 1] + previousLine[i];
+            }
+            return line;
+        }
+    }
+
+    public static void printPascal(int n) {
+        if (n > 1) {
+            printPascal(n - 1);
+        }
+        System.out.println(Arrays.toString(pascal(n)));
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number of lines you want to display:");
+        int N = scanner.nextInt();  // User inputs the line number
+        printPascal(N);
+        scanner.close();
+    }
+}
